@@ -5,7 +5,6 @@
  <a href="#started">Getting Started</a> • 
   <a href="#routes">API Endpoints</a> 
   <a href="#swagger">Swagger</a> •
- <a href="#colab">Collaborators</a> •
 
 
 <p align="center">
@@ -61,4 +60,6 @@ bash
 ```
 
 
+<h3 id="#swagger">Swagger</h3>
 
+You can found the swagger information in the path: /swagger-ui/index.html#/
