@@ -1,5 +1,6 @@
 package com.transport.transport.service;
 
+import com.transport.transport.exception.PathNotFoundException;
 import com.transport.transport.model.Path;
 import com.transport.transport.repository.PathRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,9 @@ public class PathService {
     }
 
     public Path getPath(Long id) {
-        return pathRepository.findById(id).orElse(null);
+        String message = "Not found path with id: " + id;
+        return pathRepository.findById(id)
+                .orElseThrow(() -> new PathNotFoundException(message,id));
     }
 
 

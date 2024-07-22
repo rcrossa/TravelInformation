@@ -1,5 +1,6 @@
 package com.transport.transport.service;
 
+import com.transport.transport.exception.StationNotFoundException;
 import com.transport.transport.model.Station;
 import com.transport.transport.repository.StationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,8 @@ public class StationService {
     }
 
     public Station getStation(Long id) {
-        return stationRepository.findById(id).orElse(null);
+        String message = "Not found path with id: " + id;
+        return stationRepository.findById(id)
+                .orElseThrow(() -> new StationNotFoundException(message,id));
     }
 }

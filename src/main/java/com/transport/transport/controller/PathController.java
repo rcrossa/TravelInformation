@@ -23,7 +23,7 @@ public class PathController {
             @RequestBody Path path) {
         Path updatedPath = pathService.updatePath(path_id, path);
         if (updatedPath != null) {
-            return new ResponseEntity<>("ok", HttpStatus.OK);
+            return new ResponseEntity<>("Updated", HttpStatus.OK);
         }
         return new ResponseEntity<>("Path not found", HttpStatus.NOT_FOUND);
     }
@@ -52,13 +52,14 @@ public class PathController {
     public ResponseEntity<String> deletePath(@PathVariable Long path_id) {
         boolean deleted = pathService.deletePath(path_id);
         if (deleted) {
-            return new ResponseEntity<>("ok", HttpStatus.OK);
+            return new ResponseEntity<>("Deleted", HttpStatus.OK);
         }
         return new ResponseEntity<>("Path not found", HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/path/{pathId}")
     public ResponseEntity<Path> getPathById(@PathVariable Long pathId) {
-        return new ResponseEntity<>(pathService.getPath(pathId), HttpStatus.OK);
+        Path path = pathService.getPath(pathId);
+        return new ResponseEntity<>(path, HttpStatus.OK);
     }
 }

@@ -19,7 +19,7 @@ public class StationController {
             @RequestBody Station station) {
         Station updatedStation = stationService.updateStation(station_id, station.getName());
         if (updatedStation != null) {
-            return new ResponseEntity<>("ok", HttpStatus.OK);
+            return new ResponseEntity<>("Updated", HttpStatus.OK);
         }
         return new ResponseEntity<>("Station not found", HttpStatus.NOT_FOUND);
     }
@@ -34,7 +34,7 @@ public class StationController {
     public ResponseEntity<String> deleteStation(@PathVariable Long station_id) {
         boolean deleted = stationService.deleteStation(station_id);
         if (deleted) {
-            return new ResponseEntity<>("ok", HttpStatus.OK);
+            return new ResponseEntity<>("Deleted", HttpStatus.OK);
         }
         return new ResponseEntity<>("Station not found", HttpStatus.NOT_FOUND);
     }
@@ -42,5 +42,11 @@ public class StationController {
     @GetMapping
     public ResponseEntity<Iterable> getAllStations() {
         return new ResponseEntity<>(stationService.getAllStations(),HttpStatus.FOUND);
+    }
+
+    @GetMapping("/station/{stationId}")
+    public ResponseEntity<Station> getPathById(@PathVariable Long stationId) {
+        Station station = stationService.getStation(stationId);
+        return new ResponseEntity<>(station, HttpStatus.OK);
     }
 }
