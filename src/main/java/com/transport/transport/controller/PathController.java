@@ -3,6 +3,7 @@ package com.transport.transport.controller;
 
 import com.transport.transport.model.Path;
 import com.transport.transport.service.PathService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ public class PathController {
     private PathService pathService;
 
     @PutMapping("/{path_id}")
+    @Operation(description ="Update a Path")
     public ResponseEntity<String> updatePath(
             @PathVariable Long path_id,
             @RequestBody Path path) {
@@ -29,6 +31,7 @@ public class PathController {
     }
 
     @PostMapping
+    @Operation(description ="Create a Path")
     public ResponseEntity<Path> createPath(@RequestBody Path path){
         Path savePath = pathService.savePath(path);
         return new ResponseEntity<>(savePath, HttpStatus.CREATED);
@@ -36,6 +39,7 @@ public class PathController {
 
 
     @GetMapping("/{source_id}/{destination_id}")
+    @Operation(description ="Get the cheapest cost")
     public ResponseEntity<?> getOptimalPath(
             @PathVariable Long source_id,
             @PathVariable Long destination_id) {
@@ -45,10 +49,13 @@ public class PathController {
 
 
     @GetMapping
+    @Operation(description ="Get all Paths")
     public ResponseEntity<Iterable> getPaths(){
         return new ResponseEntity<>(pathService.getAllPaths(), HttpStatus.FOUND);
     }
+
     @DeleteMapping("/{path_id}")
+    @Operation(description ="Delete Path by id")
     public ResponseEntity<String> deletePath(@PathVariable Long path_id) {
         boolean deleted = pathService.deletePath(path_id);
         if (deleted) {
@@ -58,6 +65,7 @@ public class PathController {
     }
 
     @GetMapping("/path/{pathId}")
+    @Operation(description ="Get path By id")
     public ResponseEntity<Path> getPathById(@PathVariable Long pathId) {
         Path path = pathService.getPath(pathId);
         return new ResponseEntity<>(path, HttpStatus.OK);
