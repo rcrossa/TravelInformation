@@ -3,9 +3,11 @@ package com.transport.transport.service;
 import com.transport.transport.model.Path;
 import com.transport.transport.repository.PathRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+@Service
 public class PathService {
 
     @Autowired
@@ -29,7 +31,7 @@ public class PathService {
             updatedPath.setId(id);
             return pathRepository.save(updatedPath);
         }
-        return null; // O lanzar una excepción si prefieres
+        return null; // Notes: pending others
     }
 
     public boolean deletePath(Long id) {
@@ -41,14 +43,14 @@ public class PathService {
     }
 
     public Map<String, Object> findOptimalPath(Long sourceId, Long destinationId) {
-        // Construir el grafo a partir de los caminos en la base de datos
+        // Notes:
         Map<Long, Map<Long, Double>> graph = new HashMap<>();
         for (Path path : pathRepository.findAll()) {
             graph.computeIfAbsent(path.getSourceId(), k -> new HashMap<>()).put(path.getDestinationId(), path.getCost());
             graph.computeIfAbsent(path.getDestinationId(), k -> new HashMap<>()).put(path.getSourceId(), path.getCost());
         }
 
-        // Algoritmo de Dijkstra
+        // Notes Dijkstra Algorithm
         PriorityQueue<double[]> pq = new PriorityQueue<>(Comparator.comparingDouble(a -> a[1]));
         Map<Long, Double> dist = new HashMap<>();
         Map<Long, Long> prev = new HashMap<>();
@@ -77,7 +79,7 @@ public class PathService {
             }
         }
 
-        // Reconstruir el camino óptimo
+        // Notes: Optimal path rebuild
         List<Long> path = new ArrayList<>();
         double totalCost = dist.getOrDefault(destinationId, Double.MAX_VALUE);
         if (totalCost == Double.MAX_VALUE) {
