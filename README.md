@@ -3,8 +3,7 @@
 <p align="center">
  <a href="#tech">Technologies</a> • 
  <a href="#started">Getting Started</a> • 
-  <a href="#routes">API Endpoints</a> 
-  <a href="#swagger">Swagger</a> •
+  <a href="#swagger">Swagger information</a> •
 
 
 <p align="center">
