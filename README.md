@@ -7,7 +7,7 @@
 
 
 <p align="center">
-    <b>Simple description of what your project do or how to use it.</b>
+    <b>This project was carried out as a practice exercise. The exercise prompt requests a RESTful web service that stores information about paths and stations for travel optimization.</b>
 </p>
 <h2 id="tech">💻 Technologies</h2>
 
